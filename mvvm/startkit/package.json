@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "webpack --mode development",
-    "dev": "webpack-dev-server --mode development --progress --open"
+    "dev": "webpack-dev-server --mode development --progress --open",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",

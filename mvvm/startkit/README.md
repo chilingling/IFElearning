@@ -2,8 +2,10 @@
 #### 基础
 - 准备一个文件夹存放你的项目
 - npm init -y 初始化你的项目
-- 安装webpack  `npm install webpack -g`  `npm install webpack-cli -g`
-- 将webpack链接至该项目中 `npm link webpack --save-dev`, `npm link webpack-cli --save-dev`
+- 安装webpack  ~~`npm install webpack -g`  `npm install webpack-cli -g`~~`npm install webpack --save-dev`  `npm install webpack-cli --save-dev`
+	为什么这里我弃用了全局安装的方式？没错，一开始我是采用全局安装的方式的，但是环境配置到了后面就出现了很多未名的错误，比如什么`module not find`，而局部安装就很友好。
+
+- ~~将webpack链接至该项目中 `npm link webpack --save-dev`, `npm link webpack-cli --save-dev`~~
 - 使用默认配置,在src文件夹下面新建index.js作为入口文件
 - 写点东西测试一下  
 	```Javascript
@@ -20,8 +22,8 @@
 	myApp.attach(document.body);
 	```
 - 使用命令行打包： 开发环境 `webpack --mode development`；生产环境`webpack --mode production` 
-- 测试成功
-- []!(../)
+- 打包成功
+- ![](./src/img/test01.png)
 
 #### 进阶
 - 建立配置文件`webpack.config.js` 
@@ -39,7 +41,21 @@
 ```
 - 配置 webpack.config.js 文件
 - 在npm scripts中设置dev命令 `webpack --mode development`
-- 测试：可以看到打包成功
-#### 自动化&调试
-- 需要准备的：html-webpack-plugin html(自动生成html文件并引入生成的js文件)、webpack-dev-server (webpack自带的一个server)，将他们全部npm install
-- 
+- 打包：
+![](./src/img/test02.png)
+#### 自动化 调试
+- 需要准备的：html-webpack-plugin html(自动生成html文件并引入生成的js文件)、webpack-dev-server (webpack自带的一个server)，将他们全部npm install，补充一点：目前(2018.04.28)这两个插件建议采用(html-webpack-plugin@3.0.7 webpack-dev-server@3.1.1)版本，因为存在一个EntryPoint undefined的问题，参见[issue](https://github.com/jantimon/html-webpack-plugin/issues/895)
+- 配置文件：
+
+```Javascript
+	plugins: [
+		new HtmlWebPackPlugin({
+			template: "./src/index.html",
+			filename: "./index.html"
+		})
+	]
+```
+- script脚本:
+`"dev": "webpack-dev-server --mode development --progress --open"`
+- 打包：
+![](./src/img/test03.png)

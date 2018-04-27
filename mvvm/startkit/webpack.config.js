@@ -34,7 +34,4 @@ module.exports = {
 			chunkFilename: "[id].css"
 		})
 	]
-	// devServer: {
-	// 	contentBase: './dist' //告诉dev-server在dist目录下找文件
-	// }
 };
