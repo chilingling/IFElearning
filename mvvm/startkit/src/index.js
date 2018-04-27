@@ -8,7 +8,7 @@ for (let item of test) {
 
 
 var MyApp = san.defineComponent({
-	template: '<div class="bac"><p>Hello {{name}}!Hello Hot</p></div>',
+	template: '<div class="bac"><p>Hello {{name}}!Hello Hot!</p></div>',
 	initData: function() {
 		return {
 			name: 'san'

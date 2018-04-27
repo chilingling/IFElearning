@@ -1,6 +1,5 @@
-// const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	module: {
@@ -12,10 +11,12 @@ module.exports = {
 				}
 			}, {
 				test: /\.html$/,
-				use: ['html-loader']
+				use: {
+					loader: 'html-loader'
+				}
 			}, {
 				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
+				use: [MiniCssExtractPlugin.loader, 'css-loader']
 			}, {
 				test: /\.(png|gif|jpg|jpeg|bmp)$/i,
 				use: ['file-loader']
@@ -24,10 +25,16 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new HtmlWebpackPlugin({
-			template: './src/index.html',
-			filename: './index.html'
+		new HtmlWebPackPlugin({
+			template: "./src/index.html",
+			filename: "./index.html"
 		}),
-		new webpack.HotModuleReplacementPlugin()
+		new MiniCssExtractPlugin({
+			filename: "[name].css",
+			chunkFilename: "[id].css"
+		})
 	]
+	// devServer: {
+	// 	contentBase: './dist' //告诉dev-server在dist目录下找文件
+	// }
 };
