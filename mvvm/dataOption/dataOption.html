@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chorme=1">
+    <meta name="Author" content="chiling">
+    <meta name="Description" content="san框架的数据操作学习">
+    <title>Document</title>
+    <style>
+    body {
+        background-color: #a3d5d3;
+    }
+
+    .box {
+        text-align: center;
+        /*   max-width:1170px; */
+        margin: 0 auto;
+    }
+
+    .title {
+        color: #59B6FD;
+    }
+
+    .preview {
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        flex-flow: row nowrap;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .form-control {
+        color: #555;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        line-height: 1.5;
+    }
+
+    label {
+        line-height: 1.5;
+    }
+
+    .clear-info {
+        width: 10%;
+        margin: 0 auto;
+        background-color: #ccc;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/san@latest/dist/san.dev.js"></script>
+    <script>
+
+    const DataTypes = san.DataTypes;
+    var MyApp = san.defineComponent({
+        template: `<div class="box">
+            <h1 class="title">Hello {{title}}!</h1>
+        
+        <div class="form">
+            <div class="form-group">
+            	<label for="">姓名：</label>
+            	<input type="text" class="form-control" placeholder="请输入姓名" value = "{= name =}">
+            </div>
+            <div class="form-group">
+            	<label for="">年龄：</label>
+            	<input type="text" class="form-control" placeholder="请输入年龄（只支持数字）" value = "{= age =}"  on-change="filterAge">
+            </div>
+            <div class="form-group">
+            	<label for="">简介：</label>
+            	<input type="text" class="form-control" placeholder="请输入简介" value = "{= introduct =}">
+            </div>
+        </div>
+        <div class="preview"><span>信息：&nbsp;&nbsp;&nbsp;</span>姓名：<span>{{name}}</span>&nbsp;&nbsp;&nbsp;&nbsp;年龄：<span>{{age}}</span>&nbsp;&nbsp;&nbsp;&nbsp;简介：<span>{{introduct}}</span></div>
+        <div class="clear-info" on-click="clear" >清除信息</div>
+            <p></p><span title="this is {{name}}">san</span><input type="text" value ="{= name =}">
+         </div>`,
+        clear: function() {
+            this.data.set("name", '');
+            this.data.set("introduct", '');
+            this.data.set("age", '');
+        },
+        filterAge:function(e){
+        	if(isNaN(Number(e.target.value))){
+        		this.data.set("age",'');	
+        	}
+        },
+        dataTypes: {
+            name: DataTypes.string,
+            introduct: DataTypes.string,
+            age: DataTypes.string
+        },
+        initData: function() {
+            return {
+                title: 'san',
+                name: '',
+                age: '',
+                introduct: ''
+            };
+        },
+
+    });
+    var myApp = new MyApp();
+    myApp.attach(document.getElementById('root'));
+    </script>
+</body>
+
+</html>
